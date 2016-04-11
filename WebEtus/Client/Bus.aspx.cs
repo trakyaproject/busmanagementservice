@@ -10,6 +10,7 @@ using NHibernate;
 using NHibernate.Mapping.ByCode;
 using proje.Models;
 using proje;
+using proje.Extensions;
 
 public partial class Client_Bus : System.Web.UI.Page
 {
@@ -21,19 +22,16 @@ public partial class Client_Bus : System.Web.UI.Page
     protected void btnGetAccounts_DirectClick(object sender, Ext.Net.DirectEventArgs e)
     {
         Bus bus = new Bus();
-        BusService service= new BusService();
-        Object message = service.getOrGetAll(bus);
+        BusService service = new BusService();
         Store str = grdBus.GetStore();
-        
-       str.DataSource = message;
-       str.DataBind();
-
+        str.DataSource = Database.Session.QueryOver<Bus>().Where(x => x.state == true).List(); 
+        str.DataBind();
     }
 
     protected void btnAddNew_DirectClick(object sender, DirectEventArgs e)
     {
         Window1.Render(this.Form);
-
+        Window1.Show();
     }
 
     protected void btnKaydet_DirectClick(object sender, DirectEventArgs e)
@@ -55,34 +53,60 @@ public partial class Client_Bus : System.Web.UI.Page
             X.Msg.Alert("UYARI", "Boş Alan Bırakmayınız.").Show();
             return;
         }
-       
+
         BusService service = new BusService();
 
+        if (TextbusId.Text == "") {
+            Bus bus = new Bus()
+            {
+
+                
+                plate = txtPlate.Text,
+                busModel = txtModel.Text,
+                maxBusPessenger = Convert.ToInt32(txtMaxPassenger.Value)
+
+
+            };
+            service.saveOrUpdate(bus);
+        }
+
+        else { 
         Bus bus = new Bus()
         {
-             plate = txtPlate.Text,
-             busModel = txtModel.Text,
-             maxBusPessenger= Convert.ToInt32(txtMaxPassenger.Value)
-            
-            
-        };
-        
-      Object message =service.saveOrUpdate(bus);
-        
-      this.Window1.Hide();
-      
+            busId = Convert.ToInt32(TextbusId.Text),
+            plate = txtPlate.Text,
+            busModel = txtModel.Text,
+            maxBusPessenger = Convert.ToInt32(txtMaxPassenger.Value)
 
+
+        };
+
+        service.saveOrUpdate(bus);
+        }
+        
+        
+        X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
+        Window1.Hide(this.Form);
+        btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
+       
     }
 
     protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
     {
         string plate = Convert.ToString(e.ExtraParams["plate"]);
+        int busId = Convert.ToInt32(e.ExtraParams["busId"]);
         String CommandName = e.ExtraParams["command"];
+       // Bus bus = new Bus();
 
         if (plate == "") return;
         switch (CommandName)
         {
-
+            case "cmdUpdate":
+                hdnBusType.SetValue(busId);
+                TextbusId.Text = busId.ToString();
+                txtPlate.Text = plate;
+                Window1.Show();
+                break;
             case "cmdDel":
                 hdnBusDelete.SetValue(plate);
                 wndDeleteConfirm.Show();
@@ -103,7 +127,7 @@ public partial class Client_Bus : System.Web.UI.Page
         bus.plate = hdnBusDelete.Value.ToString();
         bus=busService.delete(bus);
         btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
-
+        wndDeleteConfirm.Hide();
         
 
     }

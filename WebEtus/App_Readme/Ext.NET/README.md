@@ -1,8 +1,7 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
-| Release Date | 2016-02-15 |
-| Current Version | 3.3.0 |
-| Previous Release | 3.2.1 |
+| Release Date | 2016-04-05 |
+| Current Version | 4.0.0 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues) on GitHub |
 
 ## Contents
@@ -17,9 +16,9 @@
 
 ## 1. System Requirements
 
-1. Visual Studio 2010, 2012, 2013, 2015, or
+1. Visual Studio 2012, 2013, 2015, or
 2. Visual Studio Express 2012, 2013, 2015
-3. .NET Framework 4.0, 4.5 and 4.6
+3. .NET Framework 4.0, 4.5, 4.5.2 and 4.6
 
 ## 2. Installation Instructions
 
@@ -50,8 +49,8 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
     <section name="extnet" type="Ext.Net.GlobalConfig" requirePermission="false" />
   </configSections>
 
-  <extnet theme="Crisp" licenseKey="** Ext.NET LICENSE KEY HERE **" initScriptMode="Linked" />
-
+  <extnet theme="Triton" licenseKey="** Ext.NET LICENSE KEY HERE **" initScriptMode="Linked" />
+  
   <system.web>
     <!-- This httpHandlers config only required if using IIS6 (or lower) -->
     <!--
@@ -74,17 +73,17 @@ See [CHANGELOG.md](https://github.com/extnet/Premium/blob/master/CHANGELOG.md), 
       <namespaces>
         <add namespace="Ext.Net"/>
         <!--<add namespace="Ext.Net.MVC"/>-->
-      </namespaces>
+      </namespaces>      
     </pages>
   </system.web>
 
   <system.webServer>
     <validation validateIntegratedModeConfiguration="false" />
-
+    
     <modules>
       <add name="DirectRequestModule" preCondition="managedHandler" type="Ext.Net.DirectRequestModule, Ext.Net" />
     </modules>
-
+    
     <handlers>
       <add name="DirectRequestHandler" verb="*" path="*/ext.axd" preCondition="integratedMode" type="Ext.Net.ResourceHandler" />
     </handlers>

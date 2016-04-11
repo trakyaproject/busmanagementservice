@@ -5,7 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using proje.Models;
+using proje;
 public partial class Client_Station : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -13,21 +14,21 @@ public partial class Client_Station : System.Web.UI.Page
 
 
     }
-    protected void btnGetList_DirectClick(object sender, Ext.Net.DirectEventArgs e)
+    protected void btnGetAccounts_DirectClick(object sender, Ext.Net.DirectEventArgs e)
     {
-        //    Database.OpenSession();
-        //    grdStation.BindDataSet(Database.Session.Query<etusLibrary.Station>().ToList());
-        //    Database.CloseSession();
+        Station station = new Station();
+        StationService service = new StationService();
+        Store str = grdStation.GetStore();
+        str.DataSource = Database.Session.QueryOver<Station>().Where(x => x.state == true).List();
+        str.DataBind();
     }
-    protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
-    {
-    }
+   
 
     protected void btnAddNew_DirectClick(object sender, DirectEventArgs e)
     {
 
-        //Window1.Render(this.Form);
-
+        Window1.Render(this.Form);
+        Window1.Show();
     }
     private void ResetForm()
     {
@@ -38,17 +39,80 @@ public partial class Client_Station : System.Web.UI.Page
     }
     protected void btnKaydet_DirectClick(object sender, DirectEventArgs e)
     {
-        Window1.Visible = true;
+        if (txtstationName.Text == "")
+        {
+            X.Msg.Alert("UYARI", "Boş Alan Bırakmayınız.").Show();
+            return;
+        }
+        if (txtlocation.Text == "")
+        {
+            X.Msg.Alert("UYARI", "Boş Alan Bırakmayınız.").Show();
+            return;
+        }
+        if (txtaddress.Text == "")
+        {
+            X.Msg.Alert("UYARI", "Boş Alan Bırakmayınız.").Show();
+            return;
+        }
+       StationService service = new StationService();
+       if (txtstationId.Text == "") { 
+        Station station = new Station()
+        {
+            stationName = txtstationName.Text,
+            location = txtlocation.Text,
+            address = txtaddress.Text,
+        };
+        service.saveOrUpdate(station);
+        }
 
+         else {
+             Station station = new Station()
+             {
+                 stationId =Convert.ToInt32(txtstationId.Text),
+                 stationName = txtstationName.Text,
+                 location = txtlocation.Text,
+                 address = txtaddress.Text,
+             };
+             service.saveOrUpdate(station);
+         }
 
+        X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
+        Window1.Hide(this.Form);
+        btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
+       
+    }
+    protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
+    {
 
+        string stationName = Convert.ToString(e.ExtraParams["stationName"]);
+        int stationId = Convert.ToInt32(e.ExtraParams["stationId"]);
+        String CommandName = e.ExtraParams["command"];
 
-        Window1.Visible = false;
-
+        if (stationName == "") return;
+        switch (CommandName)
+        {
+            case "cmdUpdate":
+                hdnStationType.SetValue(stationId);
+                txtstationId.Text = stationId.ToString();
+                Window1.Show();
+                break;
+            case "cmdDel":
+                hdnStationType.SetValue(stationName);
+                wndDeleteConfirm.Show();
+                break;
+        }
     }
 
     protected void btnCancel_DirectClick(object sender, DirectEventArgs e)
     {
-        //wndNew.Hide();
+    //    wndNew.Hide();
     }
+    protected void btnDeleteConfirmSave_DirectClick(object sender, DirectEventArgs e)
+    {
+    }
+    protected void btnDeleteConfirmCancel_DirectClick(object sender, DirectEventArgs e)
+    {
+        wndDeleteConfirm.Hide();
+    }
+
 }
