@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "publicTransport", "proje\publicTransport.csproj", "{DFFABE30-2019-45F3-BC46-EA7F88B01C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiEtus", "MvcApplication1\WebApiEtus.csproj", "{877F245B-A610-4F35-BEA2-7E0191574EE0}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebEtus", "http://localhost:49947", "{FF709F3A-0380-4C90-AC7B-1245787B366E}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49947"
+		Debug.AspNetCompiler.PhysicalPath = "WebEtus\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49947\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49947"
+		Release.AspNetCompiler.PhysicalPath = "WebEtus\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49947\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "WebEtus\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFFABE30-2019-45F3-BC46-EA7F88B01C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFFABE30-2019-45F3-BC46-EA7F88B01C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFFABE30-2019-45F3-BC46-EA7F88B01C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFFABE30-2019-45F3-BC46-EA7F88B01C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{877F245B-A610-4F35-BEA2-7E0191574EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{877F245B-A610-4F35-BEA2-7E0191574EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{877F245B-A610-4F35-BEA2-7E0191574EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{877F245B-A610-4F35-BEA2-7E0191574EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF709F3A-0380-4C90-AC7B-1245787B366E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF709F3A-0380-4C90-AC7B-1245787B366E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF709F3A-0380-4C90-AC7B-1245787B366E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF709F3A-0380-4C90-AC7B-1245787B366E}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
