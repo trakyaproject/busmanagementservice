@@ -11,62 +11,64 @@
     <div>
    
         <ext:Hidden runat="server" ID="hdnDriverType"></ext:Hidden>
-        <ext:GridPanel ID="grdDriver" runat="server" Title="Şoförler" AutoScroll="true">
+        <ext:GridPanel ID="grdDriver" runat="server"  AutoScroll="true">
         <TopBar>
             <ext:Toolbar ID="Toolbar2" runat="server">
                 <Items>
-                    <ext:TextField ID="txtDriverFilter" runat="server" FieldLabel="Filtre"></ext:TextField>
-                    <ext:Button ID="btnGetAccounts" runat="server" Icon="Find" OnDirectClick="btnGetAccounts_DirectClick" Text="Listele">
+                 <ext:Button runat="server" ID="btnAddNew" Text="Yeni Şoför Ekle" Icon="Add" OnDirectClick="btnAddNew_DirectClick">
+                 </ext:Button>
+                    <ext:Button ID="btnGet" runat="server" Icon="Find" OnDirectClick="btnGet_DirectClick" Text="Listele">
                         <DirectEvents>
                             <Click Timeout="2000000">
                                 <EventMask Msg="Kayıtlar Getiriliyor. Lütfen bekleyiniz..." ShowMask="true"></EventMask>
                             </Click>
                         </DirectEvents>
                     </ext:Button>
-                    <ext:Label ID="Label2" runat="server" FieldLabel="Kayıt Sayısı : "></ext:Label>
                 </Items>
             </ext:Toolbar>
         </TopBar>
-
-        <Store>
-            <ext:Store ID="Store2" runat="server" ItemID="ID">
+          <Store>
+            <ext:Store runat="server" ItemID="ID">
                 <Model>
-                    <ext:Model ID="Model2" runat="server" IDProperty="BusID">
+                    <ext:Model  runat="server" IDProperty="driverId">
                         <Fields>
-                            <ext:ModelField Name="DriverID"></ext:ModelField>
-                            <ext:ModelField Name="DriverPicture"></ext:ModelField>
-                            <ext:ModelField Name="DriverName"></ext:ModelField>
-                            <ext:ModelField Name="DriverSurname"></ext:ModelField>
-                            <ext:ModelField Name="DriverTC"></ext:ModelField>
-                            <ext:ModelField Name="DriverBirthday"></ext:ModelField>
-                            <ext:ModelField Name="DriverKanGrubu"></ext:ModelField>
-                            <ext:ModelField Name="DriverPhone"></ext:ModelField>
+                            <ext:ModelField Name="driverId"></ext:ModelField>
+                            <ext:ModelField Name="nameSurname"></ext:ModelField>
+                            <ext:ModelField Name="tc"></ext:ModelField>
+                            <ext:ModelField Name="birthday"></ext:ModelField>
+                            <ext:ModelField Name="bloodGroup"></ext:ModelField>
+                            <ext:ModelField Name="phone"></ext:ModelField>
+                            <ext:ModelField Name="address"></ext:ModelField>
+                            <ext:ModelField Name="state"></ext:ModelField>
+                             <ext:ModelField Name="createdAt"></ext:ModelField>
                         </Fields>
                     </ext:Model>
                 </Model>
             </ext:Store>
         </Store>
-        <ColumnModel ID="ColumnModel2" runat="server">
+        <ColumnModel  runat="server">
             <Columns>
-                <ext:RowNumbererColumn ID="RowNumbererColumn2" runat="server" Text="" Width="80"></ext:RowNumbererColumn>
-                <ext:TemplateColumn runat="server" Text ="" Flex="15" DataIndex="url" TemplateString='<img style="width:60px;height:45px;" src="" />'/>
-                <ext:Column ID="Column1" runat="server" DataIndex="DriverName" Flex="2" Text="Adı" ></ext:Column>
-                <ext:Column ID="Column2" runat="server" DataIndex="DriverSurname" Flex="2" Text="Soyadı"></ext:Column>
-                <ext:Column ID="Column3" runat="server" DataIndex="DriverTC" Flex="2" Text="T.C. Kimlik No"></ext:Column>
-                <ext:Column ID="Column4" runat="server" DataIndex="DriverBirthday" Flex="2" Text="Doğum Tarihi"></ext:Column>
-                <ext:Column ID="Column5" runat="server" DataIndex="DriverKanGrubu" Flex="2" Text="Kan Grubu"></ext:Column>
-                <ext:Column ID="Column6" runat="server" DataIndex="DriverPhone" Flex="2" Text="Telefon"></ext:Column>
-                
-                    <ext:CommandColumn ID="CommandColumn2" runat="server" Width="300">
+                <ext:RowNumbererColumn runat="server" Text="Sıra No" Width="80"></ext:RowNumbererColumn>
+               <%-- <ext:TemplateColumn runat="server" Text ="" Flex="15" DataIndex="url" TemplateString='<img style="width:60px;height:45px;" src="" />'/>--%>
+                <%--<ext:Column  runat="server" DataIndex="driverId" Flex="2" Text="Adı" ></ext:Column>--%>
+                <ext:Column  runat="server" DataIndex="nameSurname" Flex="2" Text="Adı Soyadı"></ext:Column>
+                <ext:Column runat="server" DataIndex="tc" Flex="2" Text="T.C. Kimlik No"></ext:Column>
+                <ext:DateColumn runat="server" DataIndex="birthday" Flex="2" Text="Doğum Tarihi"></ext:DateColumn>
+                <ext:Column runat="server" DataIndex="bloodGroup" Flex="2" Text="Kan Grubu"></ext:Column>
+                <ext:Column  runat="server" DataIndex="phone" Flex="2" Text="Telefon"></ext:Column>
+                <ext:Column  runat="server" DataIndex="address" Flex="2" Text="Adres"></ext:Column>
+                <ext:Column  runat="server" DataIndex="state" Flex="2" Text="Durum"></ext:Column>
+                <ext:DateColumn runat="server" DataIndex="createdAt" Flex="2" Text="Tarih"></ext:DateColumn>
+                <ext:CommandColumn runat="server" Width="300">
                     <Commands>
-                            <ext:GridCommand CommandName="cmdExtract" Icon="ApplicationSideList">
+                            <ext:GridCommand CommandName="cmdDel" Icon="Delete" Text="Sil">
                         </ext:GridCommand>
                     </Commands>
                     <DirectEvents>
                         <Command OnEvent="cmdCommand">
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="ID" Value="record.data.BusID"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="nameSurname" Value="record.data.nameSurname"></ext:Parameter>
                             </ExtraParams>
                             <EventMask Msg="Bilgiler getiriliyor...Lütfen Bekleyiniz.." ShowMask="true"></EventMask>
                         </Command>
@@ -75,42 +77,49 @@
             </Columns>
         </ColumnModel>
         </ext:GridPanel>
-                
-        <ext:Window runat="server" Modal="true" Hidden="true" Title="Şoförler" Width="600" Height="350" ID="wndDriver">
+       <ext:Window ID="WindowDriver" 
+            runat="server" 
+            Width="600"
+            Modal="true"
+            CloseAction = "Destroy"
+            Hidden="true"          
+            Closable="true"
+            BodyPadding="5"
+            Layout="FormLayout"
+          Visible="false">           
             <Items>
-                 <ext:GridPanel ID="grdDriver1" runat="server" Title="Şoförler Listesi" AutoScroll="true">
-                    <Store>
-                        <ext:Store ID="Store1" runat="server" ItemID="ID">
-                            <Model>
-                                <ext:Model ID="Model1" runat="server" IDProperty="ID">
-                                    <Fields>
-                                        <ext:ModelField Name="DriverID"></ext:ModelField>
-                                         <ext:ModelField Name="DriverName"></ext:ModelField>
-                                        <ext:ModelField Name="DriverSurname"></ext:ModelField>
-                                         <ext:ModelField Name="DriverTC"></ext:ModelField>
-                                        <ext:ModelField Name="DriverBirthday"></ext:ModelField>
-                                         <ext:ModelField Name="DriverKangrubu"></ext:ModelField>
-                                        <ext:ModelField Name="DriverPhone"></ext:ModelField>
-                                     </Fields>
-                                </ext:Model>
-                            </Model>
-                        </ext:Store>
-                    </Store>
-                    <ColumnModel ID="ColumnModel1" runat="server">
-                        <Columns>
-                            <ext:RowNumbererColumn ID="RowNumbererColumn1" runat="server" Text="" Width="60"></ext:RowNumbererColumn>
-                            <ext:Column ID="Column7" runat="server" DataIndex="DriverName" Text="Adı" Width="120"></ext:Column>
-                            <ext:Column ID="Column8" runat="server" DataIndex="DriverSurname" Text="Soyadı" Flex="1"></ext:Column>
-                             <ext:Column ID="Column9" runat="server" DataIndex="DriverTC" Text="T.C. Kimlik No" Width="120"></ext:Column>
-                            <ext:Column ID="Column10" runat="server" DataIndex="DriverBirthday" Text="Doğum Tarihi"></ext:Column>
-                            <ext:Column ID="Column11" runat="server" DataIndex="DriverKangrubu" Text="Kangrubu"></ext:Column>
-                         <ext:Column ID="Column12" runat="server" DataIndex="DriverPhone" Text="Telefon" Flex="1"></ext:Column>
-                            
-                        </Columns>
-                    </ColumnModel>
-                    </ext:GridPanel>
+                <ext:TextField ID="txtnameSurname" runat="server" FieldLabel="Adı Soyadı" AllowBlank="false"/>
+                <ext:TextField  ID="txttc" runat="server" FieldLabel="T.C. Kimlik No" AllowBlank="false" />
+                <ext:DateField  ID="txtbirthday" runat="server" FieldLabel="Doğum Tarihi" AllowBlank="false" />
+                <ext:TextField  ID="txtbloodGroup" runat="server" FieldLabel="Kan Grubu" AllowBlank="false" />
+                <ext:TextField  ID="txtphone" runat="server" FieldLabel="Telefon" AllowBlank="false" />
+                <ext:TextField  ID="txtaddress" runat="server" FieldLabel="Adres" AllowBlank="false">
+                 <RightButtons>
+                        <ext:Button runat="server" ID="Add" Text="Kaydet" OnDirectClick="btnKaydet_DirectClick">
+                           <DirectEvents>
+                               <Click>
+                                   <EventMask ShowMask="true" Msg="Kayıt ediliyor."></EventMask>
+                               </Click>
+                           </DirectEvents>
+                        </ext:Button>
+                    </RightButtons>
+                </ext:TextField>
+            </Items>            
+        </ext:Window>     
+          <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="300"  Height="100" BodyStyle="background-color:white;">
+            
+              <Items>
+                <ext:Hidden ID="hdnBusDelete" runat="server"></ext:Hidden>
+                <ext:Label runat="server" ID="lblDeleteConfim" HTML="silmek istediğinizden <b>emin misiniz?</b>"></ext:Label>
             </Items>
-        </ext:Window>
+            <Buttons>
+                <ext:Button runat="server" ID="btnDeleteConfirmSave" OnDirectClick="btnDeleteConfirmSave_DirectClick" Text="Sil" Icon="DatabaseDelete"></ext:Button>
+                <ext:Button runat="server" ID="btnDeleteConfirmCancel" OnDirectClick="btnDeleteConfirmCancel_DirectClick" Text="Vazgeç" Icon="Cancel"></ext:Button>
+            </Buttons>
+        </ext:Window>       
+
+
+
     </div>
     </form>
 </body>

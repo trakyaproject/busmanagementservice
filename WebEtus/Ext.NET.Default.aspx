@@ -12,7 +12,7 @@
 </script>
 
 <!DOCTYPE html>
-
+    
 <html>
 <head runat="server">
     <title>Ext.NET Example</title>
@@ -20,10 +20,10 @@
     <link type="text/css" rel="stylesheet" href="http://speed.ext.net/www/intro/css/main.css" />
 </head>
 <body>
-    <ext:ResourceManager runat="server" Theme="Crisp" />
+    <ext:ResourceManager runat="server" Theme="Triton" />
 
     <header>
-        <a href="http://ext.net/"><img src="http://speed.ext.net/identity/extnet-logo-white-large.png" class="logo"/></a>
+        <a href="http://ext.net/"><img src="http://speed.ext.net/identity/extnet-logo-large.png" class="logo"/></a>
     </header>
 
     <div class="wrapper">
@@ -31,7 +31,7 @@
         <p>Thank you for installing Ext.NET.</p>
         <p class="last">You can check that everything is working correctly by submitting a value in the message box below.</p>
     </div>
-
+    
     <form runat="server">
         <ext:Panel 
             ID="Window1"

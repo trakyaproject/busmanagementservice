@@ -12,7 +12,7 @@
     <div>
          
         <ext:Hidden runat="server" ID="hdnBusType"></ext:Hidden>
-        <ext:GridPanel ID="grdBus" runat="server" Title="Otobüsler" AutoScroll="true">
+        <ext:GridPanel ID="grdBus" runat="server"  AutoScroll="true">
         <TopBar>
             <ext:Toolbar ID="Toolbar2" runat="server">
                 <Items>
@@ -49,7 +49,7 @@
         <ColumnModel  runat="server">
             <Columns>
                 <ext:RowNumbererColumn runat="server"  Text="Sıra No" Width="80"></ext:RowNumbererColumn>
-               <%-- <ext:Column runat="server" DataIndex="busId" Flex="2" Text="" ></ext:Column>--%>
+                <ext:Column runat="server" DataIndex="busId" Flex="2" Visible="false" Text="" ></ext:Column>
                 <ext:Column  runat="server" DataIndex="plate" Flex="2" Text="Plaka" ></ext:Column>
                 <ext:Column runat="server" DataIndex="busModel" Flex="2" Text="Otobüs Modeli"></ext:Column>
                 <ext:Column runat="server" DataIndex="maxBusPessenger" Flex="2" Text="Maksimum Yolcu Sayısı"></ext:Column>
@@ -57,14 +57,16 @@
                 <ext:DateColumn runat="server" DataIndex="createdAt" Flex="2" Text="Tarih"></ext:DateColumn>
                     <ext:CommandColumn runat="server" Width="300">
                     <Commands>
-                            <ext:GridCommand CommandName="cmdDel" Icon="Delete" Text="Sil">
-                        </ext:GridCommand>
+                            <ext:GridCommand CommandName="cmdDel" Icon="Delete" Text="Sil"> </ext:GridCommand>
+                            <ext:GridCommand CommandName="cmdUpdate" Icon="ApplicationEdit" Text="Güncelle"> </ext:GridCommand>
                     </Commands>
                     <DirectEvents>
                         <Command OnEvent="cmdCommand">
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="busId" Value="record.data.busId"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="plate" Value="record.data.plate"></ext:Parameter>
+                                
                             </ExtraParams>
                             <EventMask Msg="Bilgiler getiriliyor...Lütfen Bekleyiniz.." ShowMask="true"></EventMask>
                         </Command>
@@ -74,16 +76,16 @@
         </ColumnModel>
         </ext:GridPanel>
         
-         <ext:Window ID="Window1" 
+        <ext:Window ID="Window1" 
             runat="server" 
             Width="600"
             Modal="true"
-            CloseAction = "Destroy"          
-            Closable="true"
+            Hidden="true"          
             BodyPadding="5"
-            Layout="FormLayout"
-          Visible="false">           
+            Layout="FormLayout">           
             <Items>
+               <%-- <ext:Label ID="TextbusId2" runat="server"  FieldLabel="busId" Visible="true" AllowBlank="false" />--%>
+                <ext:TextField ID="TextbusId" runat="server"  FieldLabel="Sıra No" ReadOnly="true" Visible="true" AllowBlank="false"/>
                 <ext:TextField ID="txtPlate" runat="server" FieldLabel="Plaka" AllowBlank="false"/>
                 <ext:TextField  ID="txtModel" runat="server" FieldLabel="Otobüs Model" AllowBlank="false" />
                 <ext:TextField  ID="txtMaxPassenger" runat="server" FieldLabel="Maksimum Yolcu Sayısı" AllowBlank="false">
@@ -99,7 +101,8 @@
                 </ext:TextField>
             </Items>            
         </ext:Window>     
-          <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="300"  Height="100" BodyStyle="background-color:white;">
+         
+        <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="400" BodyPadding="5" BodyStyle="background-color:white;">
             
               <Items>
                 <ext:Hidden ID="hdnBusDelete" runat="server"></ext:Hidden>
