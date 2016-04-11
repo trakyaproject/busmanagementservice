@@ -108,5 +108,35 @@ namespace proje.Models
             return Database.Session.QueryOver<Driver>().Where(x => x.state == true).List();
         }
 
+        public Driver delete(Driver driver)
+        {
+            Driver existDriver = Database.Session.QueryOver<Driver>().Where(x => x.tc == driver.tc).SingleOrDefault();
+            if (existDriver.tc == null)
+            {
+                return null;
+            }
+            else
+            {
+                driver.driverId = existDriver.driverId;
+                existDriver.state = false;
+                driver.address = existDriver.address;
+                driver.birthday = existDriver.birthday;
+                driver.bloodGroup = existDriver.bloodGroup;
+                driver.nameSurname = existDriver.nameSurname;
+                driver.phone = existDriver.phone;
+                driver.picture = existDriver.picture;
+                driver.tc = existDriver.tc;
+                driver.createdAt = existDriver.createdAt;
+
+                Database.Session.Clear();
+                Database.Session.Update(driver);
+                Database.Session.Flush();
+
+
+                return driver;
+            }
+
+        }
+
     }
 }
