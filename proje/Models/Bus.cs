@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace proje.Models
 {
+    // haLDun was HERE !!
     public class Bus
     {
         public virtual int busId { get; set; }
