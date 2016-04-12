@@ -118,7 +118,7 @@ namespace proje.Models
             else
             {
                 driver.driverId = existDriver.driverId;
-                existDriver.state = false;
+                driver.state = false;
                 driver.address = existDriver.address;
                 driver.birthday = existDriver.birthday;
                 driver.bloodGroup = existDriver.bloodGroup;

@@ -105,13 +105,13 @@ namespace proje.Models
             else
             {
                     bus.busId = existBus.busId;
-                    existBus.state = false;
+                    bus.state = false;
                     bus.busModel = existBus.busModel;
                     bus.maxBusPessenger = existBus.maxBusPessenger;
                     bus.plate = existBus.plate;
                     bus.createdAt = existBus.createdAt;
 
-                    Database.Session.Clear();
+                    Database.Session.Clear(); 
                     Database.Session.Update(bus);
                     Database.Session.Flush();
                 

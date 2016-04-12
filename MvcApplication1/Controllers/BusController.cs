@@ -27,5 +27,11 @@ namespace MvcApplication1.Controllers
         {
             return busService.getAllBus();
         }
+
+        [HttpPost]
+        public Bus DelteBus(Bus bus)
+        {
+            return busService.delete(bus);
+        }
     }
 }
