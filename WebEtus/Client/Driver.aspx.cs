@@ -60,16 +60,32 @@ public partial class Client_Driver : System.Web.UI.Page
             return;
         }
         DriverService service = new DriverService();
-
-        Driver driver = new Driver()
+        if (txtdriverId.Text == "")
         {
-            nameSurname = txtnameSurname.Text,
-            tc = txttc.Text,
-            bloodGroup = txtbloodGroup.Text,
-            phone = txtphone.Text,
-            address = txtaddress.Text,
-         };
-        service.saveOrUpdate(driver);
+            Driver driver = new Driver()
+            {
+                nameSurname = txtnameSurname.Text,
+                tc = txttc.Text,
+                birthday = Convert.ToDateTime(txtbirthday.Text),
+                bloodGroup = txtbloodGroup.Text,
+                phone = txtphone.Text,
+                address = txtaddress.Text,
+            };
+            service.saveOrUpdate(driver);
+        }
+        else {
+            Driver driver = new Driver()
+            {
+                driverId = Convert.ToInt32(txtdriverId.Text),
+                nameSurname = txtnameSurname.Text,
+                tc = txttc.Text,
+                birthday = Convert.ToDateTime(txtbirthday.Text),
+                bloodGroup = txtbloodGroup.Text,
+                phone = txtphone.Text,
+                address = txtaddress.Text,
+            };
+            service.saveOrUpdate(driver);
+        }
         X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
         WindowDriver.Hide(this.Form);
         btnGet_DirectClick(new object(), new DirectEventArgs(null));
@@ -83,8 +99,47 @@ public partial class Client_Driver : System.Web.UI.Page
     }
     protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
     {
+        string tc = Convert.ToString(e.ExtraParams["tc"]);
+        int driverId = Convert.ToInt32(e.ExtraParams["driverId"]);
+        String CommandName = e.ExtraParams["command"];
+        // Bus bus = new Bus();
+
+        if (tc == "") return;
+        switch (CommandName)
+        {
+            case "cmdUpdate":
+                hdnDriverType.SetValue(driverId);
+                txtdriverId.Text = driverId.ToString();
+                txttc.Text = tc;
+                WindowDriver.Show();
+                break;
+            case "cmdDel":
+                hdnDriverDelete.SetValue(tc);
+                wndDeleteConfirm.Show();
+                break;
+        }
     }
     private void getExtract(int ID)
     {
     }
+
+    protected void btnDelete_DirectClick(object sender, DirectEventArgs e)
+    {
+        Store str = grdDriver.GetStore();
+        Driver driver = new Driver();
+        DriverService driverService = new DriverService();
+
+        driver.tc = hdnDriverDelete.Value.ToString();
+        driver = driverService.delete(driver);
+        btnGet_DirectClick(new object(), new DirectEventArgs(null));
+        wndDeleteConfirm.Hide();
+
+
+    }
+    protected void btnCancel_DirectClick(object sender, DirectEventArgs e)
+    {
+        wndDeleteConfirm.Hide();
+
+    }
+
 }

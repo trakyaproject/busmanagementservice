@@ -10,7 +10,7 @@ using NHibernate;
 using NHibernate.Mapping.ByCode;
 using proje.Models;
 using proje;
-using proje.Extensions;
+
 
 public partial class Client_Bus : System.Web.UI.Page
 {

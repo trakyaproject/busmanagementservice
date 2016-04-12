@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "publicTransport", "proje\publicTransport.csproj", "{DFFABE30-2019-45F3-BC46-EA7F88B01C06}"
 EndProject
@@ -11,6 +11,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebEtus", "http://localhost
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{dffabe30-2019-45f3-bc46-ea7f88b01c06}|proje.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_49947"
 		Debug.AspNetCompiler.PhysicalPath = "WebEtus\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49947\"

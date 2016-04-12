@@ -58,6 +58,7 @@ public partial class Client_Station : System.Web.UI.Page
        if (txtstationId.Text == "") { 
         Station station = new Station()
         {
+
             stationName = txtstationName.Text,
             location = txtlocation.Text,
             address = txtaddress.Text,
@@ -83,12 +84,11 @@ public partial class Client_Station : System.Web.UI.Page
     }
     protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
     {
-
         string stationName = Convert.ToString(e.ExtraParams["stationName"]);
         int stationId = Convert.ToInt32(e.ExtraParams["stationId"]);
         String CommandName = e.ExtraParams["command"];
 
-        if (stationName == "") return;
+        if (stationName == null) return;
         switch (CommandName)
         {
             case "cmdUpdate":
@@ -107,10 +107,18 @@ public partial class Client_Station : System.Web.UI.Page
     {
     //    wndNew.Hide();
     }
-    protected void btnDeleteConfirmSave_DirectClick(object sender, DirectEventArgs e)
+    protected void btnDel_DirectClick(object sender, DirectEventArgs e)
     {
+        Store str = grdStation.GetStore();
+        Station station = new Station();
+        StationService StationService = new StationService();
+
+        station.stationName = hdnStationDelete.Text; ;
+        station = StationService.delete(station);
+        btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
+        wndDeleteConfirm.Hide();
     }
-    protected void btnDeleteConfirmCancel_DirectClick(object sender, DirectEventArgs e)
+    protected void btnExit_DirectClick(object sender, DirectEventArgs e)
     {
         wndDeleteConfirm.Hide();
     }

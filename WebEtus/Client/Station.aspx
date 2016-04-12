@@ -61,8 +61,8 @@
                         <Command OnEvent="cmdCommand">
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="stationName" Value="record.data.stationName"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="stationId" Value="record.data.stationId"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="stationName" Value="record.data.stationName"></ext:Parameter>
                             </ExtraParams>
                             <EventMask Msg="Bilgiler getiriliyor...Lütfen Bekleyiniz.." ShowMask="true"></EventMask>
                         </Command>
@@ -76,12 +76,9 @@
             runat="server" 
             Width="600"
             Modal="true"
-            CloseAction = "Destroy"
             Hidden="true"          
-            Closable="true"
             BodyPadding="5"
-            Layout="FormLayout"
-          Visible="false">           
+            Layout="FormLayout">           
             <Items>
                  <ext:TextField ID="txtstationId" runat="server"  FieldLabel="Sıra No" ReadOnly="true" Visible="true" AllowBlank="false"/>
                 <ext:TextField ID="txtstationName" runat="server" FieldLabel="Durak Adı" AllowBlank="false"/>
@@ -102,12 +99,12 @@
           <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="300"  Height="100" BodyStyle="background-color:white;">
             
               <Items>
-                <ext:Hidden ID="hdnStationDelete" runat="server"></ext:Hidden>
+                <ext:Hidden ID="hdnStationDelete"  runat="server"></ext:Hidden>
                 <ext:Label runat="server" ID="lblDeleteConfim" HTML="silmek istediğinizden <b>emin misiniz?</b>"></ext:Label>
             </Items>
             <Buttons>
-                <ext:Button runat="server" ID="btnDeleteConfirmSave" OnDirectClick="btnDeleteConfirmSave_DirectClick" Text="Sil" Icon="DatabaseDelete"></ext:Button>
-                <ext:Button runat="server" ID="btnDeleteConfirmCancel" OnDirectClick="btnDeleteConfirmCancel_DirectClick" Text="Vazgeç" Icon="Cancel"></ext:Button>
+                <ext:Button runat="server" ID="btnDeleteConfirmSave" OnDirectClick="btnDel_DirectClick" Text="Sil" Icon="DatabaseDelete"></ext:Button>
+                <ext:Button runat="server" ID="btnDeleteConfirmCancel" OnDirectClick="btnExit_DirectClick" Text="Vazgeç" Icon="Cancel"></ext:Button>
             </Buttons>
         </ext:Window>       
 

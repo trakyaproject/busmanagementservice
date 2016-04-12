@@ -51,6 +51,7 @@
                 <ext:RowNumbererColumn runat="server" Text="Sıra No" Width="80"></ext:RowNumbererColumn>
                <%-- <ext:TemplateColumn runat="server" Text ="" Flex="15" DataIndex="url" TemplateString='<img style="width:60px;height:45px;" src="" />'/>--%>
                 <%--<ext:Column  runat="server" DataIndex="driverId" Flex="2" Text="Adı" ></ext:Column>--%>
+                <ext:Column runat="server" DataIndex="driverId" Flex="2" Visible="false" Text="" ></ext:Column>
                 <ext:Column  runat="server" DataIndex="nameSurname" Flex="2" Text="Adı Soyadı"></ext:Column>
                 <ext:Column runat="server" DataIndex="tc" Flex="2" Text="T.C. Kimlik No"></ext:Column>
                 <ext:DateColumn runat="server" DataIndex="birthday" Flex="2" Text="Doğum Tarihi"></ext:DateColumn>
@@ -61,14 +62,15 @@
                 <ext:DateColumn runat="server" DataIndex="createdAt" Flex="2" Text="Tarih"></ext:DateColumn>
                 <ext:CommandColumn runat="server" Width="300">
                     <Commands>
-                            <ext:GridCommand CommandName="cmdDel" Icon="Delete" Text="Sil">
-                        </ext:GridCommand>
+                         <ext:GridCommand CommandName="cmdUpdate" Icon="ApplicationEdit" Text="Güncelle"> </ext:GridCommand>
+                        <ext:GridCommand CommandName="cmdDel" Icon="Delete" Text="Sil"></ext:GridCommand>
                     </Commands>
                     <DirectEvents>
                         <Command OnEvent="cmdCommand">
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="nameSurname" Value="record.data.nameSurname"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="tc" Value="record.data.tc"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="driverId" Value="record.data.driverId"></ext:Parameter>
                             </ExtraParams>
                             <EventMask Msg="Bilgiler getiriliyor...Lütfen Bekleyiniz.." ShowMask="true"></EventMask>
                         </Command>
@@ -86,10 +88,11 @@
             Closable="true"
             BodyPadding="5"
             Layout="FormLayout"
-          Visible="false">           
+          >           
             <Items>
-                <ext:TextField ID="txtnameSurname" runat="server" FieldLabel="Adı Soyadı" AllowBlank="false"/>
-                <ext:TextField  ID="txttc" runat="server" FieldLabel="T.C. Kimlik No" AllowBlank="false" />
+                <ext:TextField ID="txtdriverId" runat="server"  FieldLabel="Sıra No" ReadOnly="true" Visible="true" AllowBlank="false"/>
+                 <ext:TextField  ID="txttc" runat="server" FieldLabel="T.C. Kimlik No" AllowBlank="false" />
+                <ext:TextField ID="txtnameSurname" runat="server" FieldLabel="Adı Soyadı" AllowBlank="false"/>               
                 <ext:DateField  ID="txtbirthday" runat="server" FieldLabel="Doğum Tarihi" AllowBlank="false" />
                 <ext:TextField  ID="txtbloodGroup" runat="server" FieldLabel="Kan Grubu" AllowBlank="false" />
                 <ext:TextField  ID="txtphone" runat="server" FieldLabel="Telefon" AllowBlank="false" />
@@ -109,12 +112,12 @@
           <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="300"  Height="100" BodyStyle="background-color:white;">
             
               <Items>
-                <ext:Hidden ID="hdnBusDelete" runat="server"></ext:Hidden>
+                <ext:Hidden ID="hdnDriverDelete" runat="server"></ext:Hidden>
                 <ext:Label runat="server" ID="lblDeleteConfim" HTML="silmek istediğinizden <b>emin misiniz?</b>"></ext:Label>
             </Items>
             <Buttons>
-                <ext:Button runat="server" ID="btnDeleteConfirmSave" OnDirectClick="btnDeleteConfirmSave_DirectClick" Text="Sil" Icon="DatabaseDelete"></ext:Button>
-                <ext:Button runat="server" ID="btnDeleteConfirmCancel" OnDirectClick="btnDeleteConfirmCancel_DirectClick" Text="Vazgeç" Icon="Cancel"></ext:Button>
+                <ext:Button runat="server" ID="btnDeleteConfirmSave" OnDirectClick="btnDelete_DirectClick" Text="Sil" Icon="DatabaseDelete"></ext:Button>
+                <ext:Button runat="server" ID="btnDeleteConfirmCancel" OnDirectClick="btnCancel_DirectClick" Text="Vazgeç" Icon="Cancel"></ext:Button>
             </Buttons>
         </ext:Window>       
 
