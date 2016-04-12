@@ -78,6 +78,27 @@ namespace proje.Models
             return Database.Session.QueryOver<Line>().Where(x => x.state == true).List();
         }
 
-       }
+        public Line delete(Line line)
+        {
+            Line existLine = Database.Session.QueryOver<Line>().Where(x => x.lineName == line.lineName).SingleOrDefault();
+            if (existLine.lineId == 0)
+            {
+                return null;
+            }
+            else
+            {
+                line.createdAt = existLine.createdAt;
+                line.state = false;
+                line.lineName = existLine.lineName;
+                line.lineId = existLine.lineId; 
+                Database.Session.Clear();
+                Database.Session.Update(line);
+                Database.Session.Flush();
+                return line;
+            }
+
+        }
+
+    }
     }
 

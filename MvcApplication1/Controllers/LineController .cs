@@ -15,19 +15,21 @@ namespace MvcApplication1.Controllers
         {
             return lineService.saveOrUpdate(line);
         }
-
-
         [HttpPost]
         public Line GetLine(Line line)
         {
             return lineService.getLine(line);
         }
-
-
         [HttpPost]
         public IEnumerable<Line> getAllLine()
         {
             return lineService.getAllLine();
+        }
+
+        [HttpPost]
+        public Line DeleteLine(Line line)
+        {
+            return lineService.delete(line);
         }
     }
 }

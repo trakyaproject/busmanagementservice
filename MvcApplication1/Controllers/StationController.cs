@@ -29,5 +29,10 @@ namespace MvcApplication1.Controllers
            return stationService.getAllStation();
        }
 
+        [HttpPost]
+        public Station DeleteStation(Station station)
+        {
+            return stationService.delete(station);
+        }
     }
 }

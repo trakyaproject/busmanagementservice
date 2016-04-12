@@ -93,5 +93,25 @@ namespace proje.Models
             return Database.Session.QueryOver<Station>().Where(x => x.state == true).List();
         }
 
+        public Station delete(Station station)
+        {
+            Station existStation = Database.Session.QueryOver<Station>().Where(x => x.stationName == station.stationName).SingleOrDefault();
+            if (existStation.stationId == 0)
+            {
+                return null;
+            }
+            else
+            {
+                station = existStation;
+                station.state = false;
+                
+                Database.Session.Clear();
+                Database.Session.Update(station);
+                Database.Session.Flush();
+                return station;
+            }
+
+        }
+
     }
 }
