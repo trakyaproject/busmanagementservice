@@ -113,7 +113,7 @@ public partial class Client_Station : System.Web.UI.Page
         Station station = new Station();
         StationService StationService = new StationService();
 
-        station.stationName = hdnStationDelete.Text; ;
+        station.stationName = hdnStationDelete.Value.ToString();
         station = StationService.delete(station);
         btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
         wndDeleteConfirm.Hide();
