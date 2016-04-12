@@ -47,6 +47,7 @@
         <ColumnModel  runat="server">
             <Columns>
                 <ext:RowNumbererColumn runat="server"  Text="Sıra No" Width="80"></ext:RowNumbererColumn>
+                 <ext:Column runat="server" DataIndex="stationId" Flex="2" Visible="false" Text="" ></ext:Column>
                 <ext:Column  runat="server" DataIndex="stationName" Flex="2" Text="Durak Adı" ></ext:Column>
                 <ext:Column runat="server" DataIndex="location" Flex="2" Text="Konum"></ext:Column>
                 <ext:Column runat="server" DataIndex="address" Flex="2" Text="Adres"></ext:Column>
@@ -99,7 +100,8 @@
           <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="300"  Height="100" BodyStyle="background-color:white;">
             
               <Items>
-                <ext:Hidden ID="hdnStationDelete"  runat="server"></ext:Hidden>
+                  
+                <ext:Hidden runat="server" ID="hdnStationDelete"></ext:Hidden>
                 <ext:Label runat="server" ID="lblDeleteConfim" HTML="silmek istediğinizden <b>emin misiniz?</b>"></ext:Label>
             </Items>
             <Buttons>

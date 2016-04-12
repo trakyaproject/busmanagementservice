@@ -97,7 +97,7 @@ public partial class Client_Station : System.Web.UI.Page
                 Window1.Show();
                 break;
             case "cmdDel":
-                hdnStationType.SetValue(stationName);
+                hdnStationDelete.SetValue(stationName);
                 wndDeleteConfirm.Show();
                 break;
         }
@@ -109,6 +109,7 @@ public partial class Client_Station : System.Web.UI.Page
     }
     protected void btnDel_DirectClick(object sender, DirectEventArgs e)
     {
+       
         Store str = grdStation.GetStore();
         Station station = new Station();
         StationService StationService = new StationService();
