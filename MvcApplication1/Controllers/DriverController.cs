@@ -30,5 +30,10 @@ namespace MvcApplication1.Controllers
         {
             return driverService.getAllDriver();
         }
+        [HttpPost]
+        public Driver DeleteDriver(Driver Driver)
+        {
+            return driverService.delete(Driver);
+        }
     }
 }
