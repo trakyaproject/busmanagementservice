@@ -18,5 +18,11 @@ namespace MvcApplication1.Controllers
         {
             return shifTimeService.Save(shifTime);
         }
+
+        [HttpPost]
+        public ShiftTime Get(ShiftTime shifTime)
+        {
+            return shifTimeService.Get(shifTime);
+        }
     }
 }

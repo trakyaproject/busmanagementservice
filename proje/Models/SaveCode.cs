@@ -1,4 +1,5 @@
-﻿using NHibernate.Mapping.ByCode.Conformist;
+﻿using NHibernate.Mapping.ByCode;
+using NHibernate.Mapping.ByCode.Conformist;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace proje.Models
 {
    public class SaveCode
     {
+        public virtual int codeId { get; set; }
         public virtual Driver driverId { get; set; }
         public virtual string code { get; set; }
         public virtual DateTime dateCode { get; set; }
@@ -20,6 +22,7 @@ namespace proje.Models
         public SaveCodeMap()
         {
             Table("SaveCode");
+            Id(x => x.codeId, x => x.Generator(Generators.Identity));
             Property(x => x.code, x => x.NotNullable(true));
             Property(x => x.dateCode, x => x.NotNullable(true));
 
@@ -31,6 +34,16 @@ namespace proje.Models
             }); 
 
 
+        }
+    }
+    public class SaveCodeService
+    {
+        public SaveCode Save(SaveCode saveCode)
+        {
+            saveCode.dateCode = DateTime.Now;
+            saveCode.driverId = Database.Session.QueryOver<Driver>().Where(x => x.driverId == saveCode.driverId.driverId &&x.state==true).SingleOrDefault();
+            Database.Session.Save(saveCode);
+            return saveCode;
         }
     }
 }

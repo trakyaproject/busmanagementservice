@@ -111,6 +111,7 @@ namespace proje.Migrations
                 .WithColumn("createdAt").AsDateTime();
 
             Create.Table("SaveCode")
+               .WithColumn("codeId").AsInt32().Identity().PrimaryKey()
                 .WithColumn("driverId").AsInt32().ForeignKey("Driver", "driverId").OnDelete(Rule.Cascade)
                 .WithColumn("code").AsString(64)
                 .WithColumn("dateCode").AsDateTime();
