@@ -29,7 +29,7 @@ namespace MvcApplication1.Controllers
         }
 
         [HttpPost]
-        public Bus DelteBus(Bus bus)
+        public Bus DeleteBus(Bus bus)
         {
             return busService.delete(bus);
         }
