@@ -10,10 +10,17 @@ namespace MvcApplication1.Controllers
     public class SaveCodeController : ApiController
     {
         SaveCodeService saveCodeService = new SaveCodeService();
+
         [HttpPost]
         public SaveCode Save(SaveCode saveCode)
         {
             return saveCodeService.Save(saveCode);
+        }
+
+        [HttpPost]
+        public SaveCode Get(SaveCode saveCode)
+        {
+            return saveCodeService.GetCode(saveCode);
         }
     }
 }
