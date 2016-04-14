@@ -48,7 +48,7 @@ namespace proje.Models
          public SaveCode GetCode(SaveCode saveCode)
         {
             Driver driver = Database.Session.QueryOver<Driver>().Where(x => x.driverId == saveCode.driverId.driverId).SingleOrDefault();
-            saveCode = Database.Session.QueryOver<SaveCode>().Where(x => x.driverId.driverId == driver.driverId && x.dateCode<= DateTime.Now.AddDays(1)).SingleOrDefault();
+            saveCode = Database.Session.QueryOver<SaveCode>().Where(x => x.driverId.driverId == driver.driverId && x.dateCode>= DateTime.Now.AddDays(-1)).SingleOrDefault();
             return saveCode;
         }
     }
