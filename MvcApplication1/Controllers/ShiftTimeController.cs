@@ -20,7 +20,7 @@ namespace MvcApplication1.Controllers
         }
 
         [HttpPost]
-        public ShiftTime Get(ShiftTime shifTime)
+        public ShiftTime Get(string shifTime)
         {
             return shifTimeService.Get(shifTime);
         }
