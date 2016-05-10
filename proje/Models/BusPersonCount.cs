@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NHibernate.Linq;
 
 namespace proje.Models
 {
@@ -29,8 +30,65 @@ namespace proje.Models
             {
                 x.Column("busId");
                 x.NotNullable(true);
-            }); 
+            });
         }
 
+    }
+
+    public class BusPersonCountService
+    {
+        BusPersonCount newCount = new BusPersonCount();
+
+        public BusPersonCount BusPersonCountSave(BusPersonCount Count)
+        {
+                newCount = Count;
+                newCount.busId = newCount.busId;
+                Count.busPersonCountTime = System.DateTime.Now;
+                Count.busPersonCount = newCount.busPersonCount;
+                Database.Session.Save(newCount);
+
+                return Count;
+        }
+
+        //public String BusPersonCountSave(BusPersonCount Count)
+        //{
+          
+        //    String record = "record is Null";
+        //    String unsuccess = "Gerekli Değerleri giriniz";
+        //    newCount = Count;
+
+        //    Bus ExistBus = Database.Session.Load<Bus>(Count.busId.busId);
+        //    if (ExistBus.busId == 0)
+        //    {
+        //        return record;
+        //    }
+
+        //    if (newCount.busPersonCount == 0)
+        //    { 
+        //        return unsuccess; 
+        //    }
+
+        //    if(newCount.busId == null)
+        //    {
+        //        return unsuccess;
+        //    }
+           
+           
+        //        String success = "Kayıt Başarılı";
+        //        newCount = Count;
+        //        Count.busId = newCount.busId;
+        //        Count.busPersonCountTime = System.DateTime.Now;
+        //        Count.busPersonCount = newCount.busPersonCount;
+        //        Database.Session.Save(newCount);
+
+        //        return success;
+            
+        //}
+
+        public BusPersonCount BusPersonCountGetByBusId(BusPersonCount Count)
+        {
+            Count = Database.Session.Query<BusPersonCount>().Where(x => x.busId == Count.busId).OrderByDescending(x => x.busPersonCountId).ToList().First();
+            return Count;
+        }
     }
 }
