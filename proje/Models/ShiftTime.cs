@@ -66,9 +66,9 @@ namespace proje.Models
   public class ShifTimeService
     {
         ShiftTime message;
-        public ShiftTime Get(ShiftTime shifTime)
+        public ShiftTime Get(string shifTime)
         {// burda plaka ile sorgu attgında istegin bilgiler geliyolar stations dişinda onun içde rankinge sorgu atılacak
-            Bus existPlate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime.plate.plate).SingleOrDefault();
+            Bus existPlate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime).SingleOrDefault();
             IEnumerable<ShiftTime> existShifTime = Database.Session.QueryOver<ShiftTime>().Where(x => x.plate.busId == existPlate.busId && ( x.stiftStart<= DateTime.Now && DateTime.Now<=x.shiftEnd)).OrderBy(y => y.createdAt).Desc.List();
             
             Database.Session.Flush();
