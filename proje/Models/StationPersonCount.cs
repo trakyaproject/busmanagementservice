@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NHibernate.Linq;
 
 
 namespace proje.Models
@@ -31,6 +32,28 @@ namespace proje.Models
                 x.Column("stationId");
                 x.NotNullable(true);
             }); 
+        }
+    }
+
+    public class StationPersonCountService
+    {
+        StationPersonCount newCount = new StationPersonCount();
+
+        public StationPersonCount StationPersonCountSave(StationPersonCount Count)
+        {
+            newCount = Count;
+            Count.stationId = newCount.stationId;
+            Count.stationPersonCountTime = System.DateTime.Now;
+            Count.stationPersonCount = newCount.stationPersonCount;
+            Database.Session.Save(newCount);
+
+            return Count;
+        }
+
+        public StationPersonCount StationPersonCountGetByStationId(StationPersonCount Count)
+        {
+            Count = Database.Session.Query<StationPersonCount>().Where(x => x.stationId == Count.stationId).OrderByDescending(x => x.stationPersonCountId).ToList().First();
+            return Count;
         }
     }
 }
