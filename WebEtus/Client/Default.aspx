@@ -92,7 +92,7 @@
                     <Root>
                         <ext:Node>
                             <Children>
-                                <ext:Node Expanded="true" Icon="TableCell" Text="Tanımlar" NodeID="nodeMenu">
+                                <ext:Node Expanded="true" Icon="TableCell" Text="Tanımlar"  NodeID="nodeMenu">
                                     <Children>
                                          
                                         <ext:Node Leaf="true" Text="Otobüsler" NodeID="nodeBus" Icon="Car">
@@ -118,12 +118,12 @@
                                 </ext:Node>
                             </Children>
                             <Children>
-                                <ext:Node Expanded="true"  Text="Raporlar" NodeID="nodeMenu1">
+                                <ext:Node Expanded="true"  Text="Raporlar" NodeID="nodeMenu1" Icon="PageWhiteText">
                                     <Children>
                                          
-                                        <ext:Node Leaf="true" Text="Cezalar" NodeID="nodeCeza" Icon="Money">
+                                        <ext:Node Leaf="true" Text="Vardiya" NodeID="nodeCeza" Icon="Time">
                                             <CustomAttributes>
-                                                <ext:ConfigItem Mode="Value" Name="url" Value="Ceza.aspx">
+                                                <ext:ConfigItem Mode="Value" Name="url" Value="ShiftTime.aspx">
                                                 </ext:ConfigItem>
                                             </CustomAttributes>
                                         </ext:Node>
