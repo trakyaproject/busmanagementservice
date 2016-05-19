@@ -77,6 +77,10 @@ namespace proje.Models
 
             return existShifTime.FirstOrDefault();
         }
+        public IEnumerable< ShiftTime> GetAll()
+        {
+            return Database.Session.QueryOver<ShiftTime>().Where(x=> x.stiftStart <= DateTime.Now && DateTime.Now <= x.shiftEnd).List();
+        }
         Object mssg;
         
         public ShiftTime Save(ShiftTime shifTime)
