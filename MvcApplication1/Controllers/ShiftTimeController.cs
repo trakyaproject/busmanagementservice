@@ -31,5 +31,9 @@ namespace MvcApplication1.Controllers
         {
             return shifTimeService.Get(filter.plate);
         }
+        public IEnumerable<ShiftTime> GetAll()
+        {
+            return shifTimeService.GetAll();
+        }
     }
 }
