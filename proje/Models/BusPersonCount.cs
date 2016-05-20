@@ -87,7 +87,7 @@ namespace proje.Models
 
         public BusPersonCount BusPersonCountGetByBusId(BusPersonCount Count)
         {
-            Count = Database.Session.Query<BusPersonCount>().Where(x => x.busId == Count.busId).OrderByDescending(x => x.busPersonCountId).ToList().First();
+            Count = Database.Session.Query<BusPersonCount>().Where(x => x.busId.busId == Count.busId.busId).OrderByDescending(x => x.busPersonCountId).ToList().First();
             return Count;
         }
     }

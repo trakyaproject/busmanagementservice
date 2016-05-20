@@ -38,7 +38,7 @@ namespace proje.Models
     }
     public class BusLocationService
     {
-        Object message;
+      
         public BusLocation Save(BusLocation buslocation)
         {
             
@@ -59,19 +59,15 @@ namespace proje.Models
             }
             else
             {
-                try
-                {
+              
                     buslocation.createdAt = DateTime.Now;
                     buslocation.state = true;
                     buslocation.busId = existBus;
                     Database.Session.Clear();
                     Database.Session.Save(buslocation);
                     Database.Session.Flush();
-                }
-                catch (Exception e)
-                {
-                    message = e.InnerException.Message;
-                }
+                
+             
             }
             return buslocation;
         }

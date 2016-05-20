@@ -55,11 +55,14 @@ namespace proje.Models
                 driver.state = true;
                 try
                 {
+                    Database.Session.Clear();
                     Database.Session.Save(driver);
+                    Database.Session.Flush();
                 }
                 catch (Exception e)
                 {
                     message = e.InnerException.Message;
+                    return null;
                 }
             }
             else
@@ -68,8 +71,10 @@ namespace proje.Models
                 newDriver = driver;
                 newDriver.createdAt = System.DateTime.Now;
                 newDriver.state = true;
-                if (driver.picture == 0 || driver.phone == null || driver.address == null)
+                if (driver.picture == 0 || driver.phone == null || driver.address == null||driver.tc==null)
                 {
+                    if (driver.tc == null)
+                        newDriver.tc = existDriver.tc;
 
                     if (driver.address == null)
                         newDriver.address = existDriver.address;
@@ -89,6 +94,7 @@ namespace proje.Models
                 catch (Exception e)
                 {
                     message = e.InnerException.Message;
+                    return null;
                 }
             }
             return driver;
