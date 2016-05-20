@@ -85,23 +85,24 @@ namespace proje.Models
         
         public ShiftTime Save(ShiftTime shifTime)
         {
-            
-            try
-            {
-               
-                shifTime.createdAt = DateTime.Now;
+
+            shifTime.plate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime.plate.plate).SingleOrDefault();
+        shifTime.lineId=Database.Session.QueryOver<Line>().Where(x => x.lineName == shifTime.lineId.lineName).SingleOrDefault();
+            shifTime.driverId = Database.Session.QueryOver<Driver>().Where(x => x.driverId == shifTime.driverId.driverId).SingleOrDefault();
+            shifTime.createdAt = DateTime.Now;
+        
                 shifTime.state = true;
                 Database.Session.Save(shifTime);
-            }
-            catch(Exception e)
-            {
-                if (e.InnerException.Message != null)
-                    mssg = e.InnerException.Message;
-                else
-                    mssg = e.Message;
+            
+            //catch(Exception e)
+            //{
+            //    if (e.InnerException.Message != null)
+            //        mssg = e.InnerException.Message;
+            //    else
+            //        mssg = e.Message;
 
 
-            }
+            //}
             return shifTime;
         }
     }
