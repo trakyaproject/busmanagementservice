@@ -13,7 +13,7 @@ public partial class Client_Driver : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        btnGet_DirectClick(new object(), new DirectEventArgs(null));
 
     }
     protected void btnGet_DirectClick(object sender, DirectEventArgs e)
@@ -91,12 +91,6 @@ public partial class Client_Driver : System.Web.UI.Page
         btnGet_DirectClick(new object(), new DirectEventArgs(null));
        
     }
-    protected void btnDeleteConfirmSave_DirectClick(object sender, DirectEventArgs e)
-    {
-    }
-    protected void btnDeleteConfirmCancel_DirectClick(object sender, DirectEventArgs e)
-    {
-    }
     protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
     {
         string tc = Convert.ToString(e.ExtraParams["tc"]);
@@ -119,10 +113,6 @@ public partial class Client_Driver : System.Web.UI.Page
                 break;
         }
     }
-    private void getExtract(int ID)
-    {
-    }
-
     protected void btnDelete_DirectClick(object sender, DirectEventArgs e)
     {
         Store str = grdDriver.GetStore();

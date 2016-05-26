@@ -9,8 +9,7 @@
 <body>
     <ext:ResourceManager  runat="server"></ext:ResourceManager>
     <form id="form1" runat="server">
-    <div>
-         
+    <div>         
         <ext:Hidden runat="server" ID="hdnBusType"></ext:Hidden>
         <ext:GridPanel ID="grdBus" runat="server"  AutoScroll="true">
         <TopBar>
@@ -29,7 +28,6 @@
                 </Items>
             </ext:Toolbar>
         </TopBar>
-
         <Store>
             <ext:Store runat="server" ItemID="ID">
                 <Model>
@@ -65,8 +63,7 @@
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="busId" Value="record.data.busId"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="plate" Value="record.data.plate"></ext:Parameter>
-                                
+                                <ext:Parameter Mode="Raw" Name="plate" Value="record.data.plate"></ext:Parameter>                                
                             </ExtraParams>
                             <EventMask Msg="Bilgiler getiriliyor...Lütfen Bekleyiniz.." ShowMask="true"></EventMask>
                         </Command>
@@ -75,8 +72,7 @@
             </Columns>
         </ColumnModel>
         </ext:GridPanel>
-        
-        <ext:Window ID="Window1" 
+          <ext:Window ID="Window1" 
             runat="server" 
             Width="600"
             Modal="true"
@@ -100,11 +96,9 @@
                     </RightButtons>
                 </ext:TextField>
             </Items>            
-        </ext:Window>     
-         
-        <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="400" BodyPadding="5" BodyStyle="background-color:white;">
-            
-              <Items>
+        </ext:Window>
+         <ext:Window runat="server" ID="wndDeleteConfirm" Title="Silme Onayı" Modal="true" Hidden="true" Width="400" BodyPadding="5" BodyStyle="background-color:white;">
+            <Items>
                 <ext:Hidden ID="hdnBusDelete" runat="server"></ext:Hidden>
                 <ext:Label runat="server" ID="lblDeleteConfim" HTML="silmek istediğinizden <b>emin misiniz?</b>"></ext:Label>
             </Items>
@@ -113,7 +107,6 @@
                 <ext:Button runat="server" ID="btnDeleteConfirmCancel" OnDirectClick="btnDeleteConfirmCancel_DirectClick" Text="Vazgeç" Icon="Cancel"></ext:Button>
             </Buttons>
         </ext:Window>       
-
     </div>
     </form>
 </body>

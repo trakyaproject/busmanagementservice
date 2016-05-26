@@ -14,8 +14,8 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnLogin_DirectClick(object sender, DirectEventArgs e)
     {
-        string username = "benay";
-        string psw = "bny";
+        string username = "Ali Duru";
+        string psw = "1234";
         if (txtUsername.Text == username && txtPassword.Text == psw)
         {
             Response.Redirect("~/Client/Default.aspx");

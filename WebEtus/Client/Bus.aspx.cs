@@ -16,7 +16,7 @@ public partial class Client_Bus : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
     }
 
     protected void btnGetAccounts_DirectClick(object sender, Ext.Net.DirectEventArgs e)
@@ -112,9 +112,6 @@ public partial class Client_Bus : System.Web.UI.Page
                 wndDeleteConfirm.Show();
                 break;
         }
-    }
-    private void getExtract(int ID)
-    {
     }
     protected void btnDeleteConfirmSave_DirectClick(object sender, DirectEventArgs e)
     {

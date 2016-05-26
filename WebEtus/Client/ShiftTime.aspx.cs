@@ -11,40 +11,46 @@ public partial class Client_ShiftTime : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-
+            btnGet_DirectClick(new object(), new DirectEventArgs(null));
+            cmbDriverList = cmbDriver.GetStore();
+            cmbDriverList.DataSource = new DriverService().getAllDriver();
+            cmbDriverList.DataBind();
+            cmbPlateList = cmbplate.GetStore();
+            cmbPlateList.DataSource = new BusService().getAllBus();
+            cmbPlateList.DataBind();
+            cmbLineList = cmblineName.GetStore();
+            cmbLineList.DataSource = new LineService().getAllLine();
+            cmbLineList.DataBind();
+            
     }
     protected void btnGet_DirectClick(object sender, DirectEventArgs e)
     {
-        ShiftTime sT = new ShiftTime();
+        //ShiftTime st = new ShiftTime();
         ShifTimeService stService = new ShifTimeService();
+        
         Store str = grdST.GetStore();
+        str.DataSource = stService.GetAll();
         str.DataBind();
     }
     protected void btnAddNew_DirectClick(object sender, DirectEventArgs e)
     {
         WindowST.Render(this.Form);
         WindowST.Show();
-       
-    
     }
     protected void btnKaydet_DirectClick(object sender, DirectEventArgs e)
-    {
-        if (cmbdepartureTime.Text == "")
-        {
-            X.Msg.Alert("UYARI", "Boş Alan Bırakmayınız.").Show();
-            return;
-        }
-
+    {       
         ShifTimeService stService = new ShifTimeService();
 
         if (txtshiftTimeId.Text == "")
         {
             ShiftTime sT = new ShiftTime()
             {
-                departureTime = Convert.ToDateTime(cmbdepartureTime.Value),
-                              
-
+                departureTime = cmbdepartureTime.SelectedItem.Value.ToString(),
+                plate = new Bus() { plate = cmbplate.SelectedItem.Text},
+                driverId = new Driver() { driverId = Convert.ToInt32(cmbDriver.SelectedItem.Value.ToString()) },
+                lineId = new Line() { lineName = cmblineName.SelectedItem.Text },
+                stiftStart = Convert.ToDateTime(txtstiftStart.Text),
+                shiftEnd = Convert.ToDateTime(txtshiftEnd.Text)
             };
             stService.Save(sT);
         }
@@ -53,10 +59,13 @@ public partial class Client_ShiftTime : System.Web.UI.Page
         {
             ShiftTime sT = new ShiftTime()
             {
-                
-
+                departureTime = cmbdepartureTime.SelectedItem.Value.ToString(),
+                plate = new Bus() { plate = cmbplate.SelectedItem.Text },
+                driverId = new Driver() { driverId = Convert.ToInt32(cmbDriver.SelectedItem.Value.ToString()) },
+                lineId = new Line() { lineName = cmblineName.SelectedItem.Text },
+                stiftStart = Convert.ToDateTime(txtstiftStart.Text),
+                shiftEnd = Convert.ToDateTime(txtshiftEnd.Text)
             };
-
             stService.Save(sT);
         }
 
@@ -67,28 +76,6 @@ public partial class Client_ShiftTime : System.Web.UI.Page
        
         
     }
-    protected void btnDeleteConfirmSave_DirectClick(object sender, DirectEventArgs e)
-    {
-    }
-    protected void btnDeleteConfirmCancel_DirectClick(object sender, DirectEventArgs e)
-    {
-    }
-    protected void cmdCommand(object sender, Ext.Net.DirectEventArgs e)
-    {
-       
-    }
-    private void getExtract(int ID)
-    {
-    }
-
-    protected void btnDelete_DirectClick(object sender, DirectEventArgs e)
-    {
-        
-
-    }
-    protected void btnCancel_DirectClick(object sender, DirectEventArgs e)
-    {
-       
-
-    }
+  
+   
 }
