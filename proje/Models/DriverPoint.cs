@@ -35,6 +35,52 @@ namespace proje.Models
                 x.NotNullable(true);
             }); 
         }
+
+     
+    }
+    public class DriverPointService
+    {
+        DriverPoint newPoint = new DriverPoint();
+
+
+        public DriverPoint DriverPointSave(DriverPoint driverpoint)
+        {
+            Driver driver = new Driver();
+            driver = Database.Session.QueryOver<Driver>().Where(x => x.tc == driverpoint.driverId.tc && x.state == true).SingleOrDefault();
+
+            if (driver.driverId != 0)
+            {
+                driverpoint.createdAt = DateTime.Now;
+                driverpoint.pointTime = DateTime.Now;
+                driverpoint.state = true;
+                driverpoint.driverId = driver;
+                Database.Session.Save(driverpoint);
+                return driverpoint;
+
+            }
+            else
+
+                return null;
+        }
+
+
+
+        public DriverPoint getPoint(DriverPoint point)
+        {
+            double totalpoint = 0;
+            point.driverId = Database.Session.QueryOver<Driver>().Where(x => x.tc == point.driverId.tc).SingleOrDefault();
+            IEnumerable<DriverPoint> driverpoint = Database.Session.QueryOver<DriverPoint>().Where(x => x.driverId.driverId == point.driverId.driverId && x.createdAt.Month==DateTime.Now.AddMonths(-1).Month).List();
+            foreach (var i in driverpoint)
+            {
+
+                totalpoint += i.driverPoint;
+            }
+            point.driverPoint = Convert.ToInt32(totalpoint / driverpoint.Count());
+           
+            return point;
+
+
+        }
     }
 
 }

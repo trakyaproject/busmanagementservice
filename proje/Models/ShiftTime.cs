@@ -1,4 +1,5 @@
-﻿using NHibernate.Mapping.ByCode;
+﻿using NHibernate.Linq;
+using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,20 @@ namespace proje.Models
         public virtual DateTime createdAt { get; set; }
       //  public virtual Bus 
     }
+    public class ShiftTimes
+    {
+        public virtual int shiftTimeId { get; set; }
+        public virtual DateTime departureTime { get; set; }
 
+        public virtual String plate { get; set; }
+        public virtual String driver { get; set; }
+        public virtual String line { get; set; }
+        public virtual DateTime stiftStart { get; set; }
+        public virtual DateTime shiftEnd { get; set; }
+        public virtual bool state { get; set; }
+        public virtual DateTime createdAt { get; set; }
+    
+    }
     public class ShiftTimeMap : ClassMapping<ShiftTime>
     {
         public ShiftTimeMap()
@@ -81,6 +95,7 @@ namespace proje.Models
         {
             return Database.Session.QueryOver<ShiftTime>().Where(x=> x.stiftStart <= DateTime.Now && DateTime.Now <= x.shiftEnd).List();
         }
+        
         Object mssg;
         
         public ShiftTime Save(ShiftTime shifTime)
