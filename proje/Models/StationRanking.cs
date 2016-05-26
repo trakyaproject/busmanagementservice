@@ -34,12 +34,14 @@ namespace proje.Models
             {
                 x.Column("stationId");
                 x.NotNullable(true);
+                x.Lazy(LazyRelation.NoLazy);
             });
 
             ManyToOne(x => x.lineId, x =>
             {
                 x.Column("lineId");
                 x.NotNullable(true);
+                x.Lazy(LazyRelation.NoLazy);
             }); 
         }
 
