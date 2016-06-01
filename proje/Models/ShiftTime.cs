@@ -24,20 +24,7 @@ namespace proje.Models
         public virtual DateTime createdAt { get; set; }
       //  public virtual Bus 
     }
-    public class ShiftTimes
-    {
-        public virtual int shiftTimeId { get; set; }
-        public virtual DateTime departureTime { get; set; }
-
-        public virtual String plate { get; set; }
-        public virtual String driver { get; set; }
-        public virtual String line { get; set; }
-        public virtual DateTime stiftStart { get; set; }
-        public virtual DateTime shiftEnd { get; set; }
-        public virtual bool state { get; set; }
-        public virtual DateTime createdAt { get; set; }
-    
-    }
+  
     public class ShiftTimeMap : ClassMapping<ShiftTime>
     {
         public ShiftTimeMap()
