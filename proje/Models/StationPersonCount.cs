@@ -61,5 +61,10 @@ namespace proje.Models
             
             return Database.Session.QueryOver<StationPersonCount>().OrderBy(x=>x.stationPersonCount).Asc.List().FirstOrDefault();
         }
+        public IEnumerable< StationPersonCount> littleStationPersonCountList()
+        {
+
+            return Database.Session.QueryOver<StationPersonCount>().OrderBy(x => x.stationPersonCount).Asc.List();
+        }
     }
 }

@@ -28,5 +28,10 @@ namespace MvcApplication1.Controllers
         {
             return SPCountService.littleStationPersonCount();
         }
+        [HttpPost]
+        public IEnumerable<StationPersonCount> littleStationPersonCountList()
+        {
+            return SPCountService.littleStationPersonCountList();
+        }
     }
 }

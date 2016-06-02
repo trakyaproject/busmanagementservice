@@ -40,5 +40,6 @@ namespace MvcApplication1.Controllers
         {
             return stationService.ImminentStations(Location);
         }
+       
     }
 }
