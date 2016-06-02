@@ -36,5 +36,9 @@ namespace MvcApplication1.Controllers
         {
             return shifTimeService.GetAll();
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> c74b9c25179700fc8fafabed1898184b2ef5a277
     }
 }

@@ -9,6 +9,7 @@ namespace MvcApplication1.Controllers
 {
     public class LineController : ApiController
     {
+        OnComingBus OnComingBus = new OnComingBus();
         LineService lineService = new LineService();
         [HttpPost]
        public Line SaveOrUpdate(Line line)
@@ -30,6 +31,11 @@ namespace MvcApplication1.Controllers
         public Line DeleteLine(Line line)
         {
             return lineService.delete(line);
+        }
+        [HttpPost]
+        public IList< BusLocation> GetOnComingBus(Station Station)
+        {
+            return OnComingBus.GetOnComingBus(Station);
         }
     }
 }

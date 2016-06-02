@@ -41,11 +41,11 @@ namespace proje.Models
 
         public StationPersonCount StationPersonCountSave(StationPersonCount Count)
         {
-            newCount = Count;
-            Count.stationId = newCount.stationId;
+            
             Count.stationPersonCountTime = System.DateTime.Now;
-            Count.stationPersonCount = newCount.stationPersonCount;
-            Database.Session.Save(newCount);
+          Count.stationId=  Database.Session.QueryOver<Station>().Where(x => x.stationId == Count.stationId.stationId).SingleOrDefault();
+            Database.Session.Save(Count);
+
 
             return Count;
         }
