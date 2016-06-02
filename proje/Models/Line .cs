@@ -106,8 +106,8 @@ namespace proje.Models
 
     public class OnComingBus
     {
-        IEnumerable<ShiftTime> s;
-      IList<BusLocation> buslist;
+        IEnumerable<ShiftTime> shiftTime;
+        IList<BusLocation> buslist;
         IList<BusLocation> buslists;
         public IList<BusLocation> GetOnComingBus(Station Station)
         {
@@ -120,19 +120,18 @@ namespace proje.Models
             float meridyen = float.Parse(Location[0], CultureInfo.InvariantCulture.NumberFormat);
             float paralel = float.Parse(Location[1], CultureInfo.InvariantCulture.NumberFormat);
             Lines = Database.Session.QueryOver<StationRanking>().Where(x => x.stationId.stationId == stationLocation.stationId).List();
-            
+
 
             foreach (var i in Lines)
             {
-                s = Database.Session.QueryOver<ShiftTime>().Where(x => x.lineId.lineId == i.lineId.lineId).List();
+                shiftTime = Database.Session.QueryOver<ShiftTime>().Where(x => x.lineId.lineId == i.lineId.lineId).List();
             }
 
-           
-           
-            foreach (var i in s)
+            foreach (var i in shiftTime)
             {
+                 
                 buslist.Add(Database.Session.QueryOver<BusLocation>().Where(x => x.busId.busId == i.plate.busId && x.state == true).SingleOrDefault());
-             
+
             }
             for (int i = 0; i < buslist.Count; i++)
             {
@@ -140,16 +139,18 @@ namespace proje.Models
                 float meridyen1 = float.Parse(location1[0], CultureInfo.InvariantCulture.NumberFormat);
                 float paralel1 = float.Parse(location1[1], CultureInfo.InvariantCulture.NumberFormat);
 
-                double uz = distFrom(paralel, meridyen,  paralel1, meridyen1);
-                if (uz < 2)
+                double uzaklik = distFrom(paralel, meridyen, paralel1, meridyen1);
+                if (uzaklik < 2)
                 {
-
-              IList<BusLocation> busloc=Database.Session.QueryOver<BusLocation>().Where(x => x.busId.busId == buslist[i].busId.busId).OrderBy(x => x.createdAt).Desc.List();
-                  String[] buslocc=  busloc[1].busLocation.Split(' ');
+                    IList<BusLocation> busloc = Database.Session.QueryOver<BusLocation>().Where(x => x.busId.busId == buslist[i].busId.busId).OrderBy(x => x.createdAt).Desc.List();
+                    String[] buslocc = busloc[1].busLocation.Split(' ');
                     float meridyen2 = float.Parse(buslocc[0], CultureInfo.InvariantCulture.NumberFormat);
                     float paralel2 = float.Parse(buslocc[1], CultureInfo.InvariantCulture.NumberFormat);
-                    if(uz<distFrom(paralel, meridyen, paralel2, meridyen2))
-                    buslists.Add( buslist[i]);
+                    if (uzaklik < distFrom(paralel, meridyen, paralel2, meridyen2))
+                    {
+                        buslists.Add(buslist[i]);
+                        buslists.OrderBy(x => x.busLocation);
+                    }
                 }
             }
             return buslists;
@@ -172,7 +173,7 @@ namespace proje.Models
 
             double p1X = lng1 / 180 * Math.PI;
             double p1Y = lat1 / 180 * Math.PI;
-            double p2X =lng2 / 180 * Math.PI;
+            double p2X = lng2 / 180 * Math.PI;
             double p2Y = lat2 / 180 * Math.PI;
 
             return Math.Acos(Math.Sin(p1Y) * Math.Sin(p2Y) +
