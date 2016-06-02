@@ -13,16 +13,57 @@ namespace proje.Models
     public class ShiftTime
     {
         public virtual int shiftTimeId { get; set; }
-        public virtual DateTime departureTime { get; set; }
-      
+        public virtual string departureTime { get; set; }
         public virtual Bus plate { get; set; }
+        public virtual String Busplate {get {
+            try
+            {}
+            catch
+            {
+                return "";
+              
+            }
+            
+            return plate.plate; }  }
         public virtual Driver driverId { get; set; }
+        public virtual string  DriverdriverId
+        {
+            get
+            {
+                try
+                {}
+                catch
+                {
+                    return "";
+
+                }
+
+                return driverId.nameSurname;
+            }
+        }
         public virtual Line lineId { get; set; }
+        public virtual string LinelineId
+        {
+            get
+            {
+                try
+                {
+
+                }
+                catch
+                {
+                    return "";
+
+                }
+
+                return lineId.lineName;
+            }
+        }
         public virtual DateTime stiftStart { get; set; }
         public virtual DateTime shiftEnd { get; set; }
         public virtual bool state { get; set; }
         public virtual DateTime createdAt { get; set; }
-      //  public virtual Bus 
+    
     }
   
     public class ShiftTimeMap : ClassMapping<ShiftTime>
@@ -67,6 +108,11 @@ namespace proje.Models
   public class ShifTimeService
     {
         ShiftTime message;
+        public IEnumerable<ShiftTime> GetAll()
+        {
+            return Database.Session.QueryOver<ShiftTime>().Where(x => x.stiftStart <= DateTime.Now && DateTime.Now <= x.shiftEnd).List();
+        }
+
         public ShiftTime Get(string shifTime)
         {// burda plaka ile sorgu attgında istegin bilgiler geliyolar stations dişinda onun içde rankinge sorgu atılacak
             Bus existPlate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime).SingleOrDefault();
@@ -84,9 +130,11 @@ namespace proje.Models
         }
         
         Object mssg;
-        
+
         public ShiftTime Save(ShiftTime shifTime)
         {
+<<<<<<< HEAD
+=======
 
             shifTime.plate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime.plate.plate).SingleOrDefault();
         shifTime.lineId=Database.Session.QueryOver<Line>().Where(x => x.lineName == shifTime.lineId.lineName).SingleOrDefault();
@@ -102,8 +150,27 @@ namespace proje.Models
             //        mssg = e.InnerException.Message;
             //    else
             //        mssg = e.Message;
+>>>>>>> c74b9c25179700fc8fafabed1898184b2ef5a277
+
+            shifTime.plate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime.plate.plate).SingleOrDefault();
+            shifTime.lineId = Database.Session.QueryOver<Line>().Where(x => x.lineName == shifTime.lineId.lineName).SingleOrDefault();
+            shifTime.driverId = Database.Session.QueryOver<Driver>().Where(x => x.driverId == shifTime.driverId.driverId).SingleOrDefault();
+            shifTime.createdAt = DateTime.Now;
+            shifTime.createdAt = DateTime.Now;
+            shifTime.state = true;
+            Database.Session.Save(shifTime);
+
+<<<<<<< HEAD
+            //catch(Exception e)
+            //{
+            //    if (e.InnerException.Message != null)
+            //        mssg = e.InnerException.Message;
+            //    else
+            //        mssg = e.Message;
 
 
+=======
+>>>>>>> c74b9c25179700fc8fafabed1898184b2ef5a277
             //}
             return shifTime;
         }

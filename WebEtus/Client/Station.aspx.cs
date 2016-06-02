@@ -11,7 +11,7 @@ public partial class Client_Station : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
 
     }
     protected void btnGetAccounts_DirectClick(object sender, Ext.Net.DirectEventArgs e)
@@ -22,8 +22,6 @@ public partial class Client_Station : System.Web.UI.Page
         str.DataSource = Database.Session.QueryOver<Station>().Where(x => x.state == true).List();
         str.DataBind();
     }
-   
-
     protected void btnAddNew_DirectClick(object sender, DirectEventArgs e)
     {
 
@@ -31,10 +29,6 @@ public partial class Client_Station : System.Web.UI.Page
         Window1.Show();
     }
     private void ResetForm()
-    {
-    }
-
-    protected void btnSave_DirectClick(object sender, DirectEventArgs e)
     {
     }
     protected void btnKaydet_DirectClick(object sender, DirectEventArgs e)
@@ -76,7 +70,9 @@ public partial class Client_Station : System.Web.UI.Page
              };
              service.saveOrUpdate(station);
          }
-
+       txtaddress.Clear();
+       txtlocation.Clear();
+       txtstationName.Clear();
         X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
         Window1.Hide(this.Form);
         btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
@@ -105,7 +101,7 @@ public partial class Client_Station : System.Web.UI.Page
 
     protected void btnCancel_DirectClick(object sender, DirectEventArgs e)
     {
-    //    wndNew.Hide();
+        Window1.Hide();
     }
     protected void btnDel_DirectClick(object sender, DirectEventArgs e)
     {
