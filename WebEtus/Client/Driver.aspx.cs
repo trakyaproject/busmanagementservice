@@ -72,6 +72,7 @@ public partial class Client_Driver : System.Web.UI.Page
                 address = txtaddress.Text,
             };
             service.saveOrUpdate(driver);
+            btnGet_DirectClick(new object(), new DirectEventArgs(null));
         }
         else {
             Driver driver = new Driver()
@@ -85,7 +86,13 @@ public partial class Client_Driver : System.Web.UI.Page
                 address = txtaddress.Text,
             };
             service.saveOrUpdate(driver);
+            btnGet_DirectClick(new object(), new DirectEventArgs(null));
         }
+        txtaddress.Clear();
+        txtbirthday.Clear();
+        txtbloodGroup.Clear();
+        txtnameSurname.Clear();
+        txtphone.Clear();
         X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
         WindowDriver.Hide(this.Form);
         btnGet_DirectClick(new object(), new DirectEventArgs(null));

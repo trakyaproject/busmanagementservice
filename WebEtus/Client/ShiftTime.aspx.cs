@@ -46,7 +46,7 @@ public partial class Client_ShiftTime : System.Web.UI.Page
             ShiftTime sT = new ShiftTime()
             {
                 departureTime = cmbdepartureTime.SelectedItem.Value.ToString(),
-                plate = new Bus() { plate = cmbplate.SelectedItem.Text},
+                plate = new Bus() { plate = cmbplate.SelectedItem.Text },
                 driverId = new Driver() { driverId = Convert.ToInt32(cmbDriver.SelectedItem.Value.ToString()) },
                 lineId = new Line() { lineName = cmblineName.SelectedItem.Text },
                 stiftStart = Convert.ToDateTime(txtstiftStart.Text),
@@ -68,8 +68,13 @@ public partial class Client_ShiftTime : System.Web.UI.Page
             };
             stService.Save(sT);
         }
-
-
+        txtshiftEnd.Clear();
+        txtshiftTimeId.Clear();
+        txtstiftStart.Clear();
+        cmbdepartureTime.Clear();
+        cmbDriver.Clear();
+        cmblineName.Clear();
+        cmbplate.Clear();
         X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
         WindowST.Hide(this.Form);
         btnGet_DirectClick(new object(), new DirectEventArgs(null));

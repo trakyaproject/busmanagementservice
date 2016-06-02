@@ -70,7 +70,9 @@ public partial class Client_Station : System.Web.UI.Page
              };
              service.saveOrUpdate(station);
          }
-
+       txtaddress.Clear();
+       txtlocation.Clear();
+       txtstationName.Clear();
         X.Msg.Alert("UYARI", "Bilgiler kayıt edilmiştir.").Show();
         Window1.Hide(this.Form);
         btnGetAccounts_DirectClick(new object(), new DirectEventArgs(null));
