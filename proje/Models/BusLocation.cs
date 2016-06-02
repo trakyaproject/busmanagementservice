@@ -16,7 +16,11 @@ namespace proje.Models
         public virtual bool state { get; set; }
         public virtual DateTime createdAt { get; set; }
     }
-
+    public class BusLocations
+    {
+        public BusLocation buslocation { get; set; }
+        public Line  Line { get; set; }
+    }
     public class BusLocationMap : ClassMapping<BusLocation>
     {
         public BusLocationMap()

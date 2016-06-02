@@ -2,13 +2,15 @@
 using NHibernate.Mapping.ByCode.Conformist;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace proje.Models
 {
-   public class Station
+    public class Station
     {
         public virtual int stationId { get; set; }
         public virtual string stationName { get; set; }
@@ -17,7 +19,10 @@ namespace proje.Models
         public virtual bool state { get; set; }
         public virtual DateTime createdAt { get; set; }
     }
-
+    public class location
+    {
+        public String Location { get; set; }
+    }
     public class StationMap : ClassMapping<Station>
     {
         public StationMap()
@@ -28,7 +33,7 @@ namespace proje.Models
             Property(x => x.location, x => x.NotNullable(true));
             Property(x => x.address, x => x.NotNullable(true));
             Property(x => x.state, x => x.NotNullable(true));
-            Property(x => x.createdAt, x => x.NotNullable(true));            
+            Property(x => x.createdAt, x => x.NotNullable(true));
         }
     }
 
@@ -48,9 +53,9 @@ namespace proje.Models
                 {
                     Database.Session.Save(station);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    message = e.InnerException.Message;           
+                    message = e.InnerException.Message;
                 }
             }
             else
@@ -71,7 +76,7 @@ namespace proje.Models
                     Database.Session.Update(newStation);
                     Database.Session.Flush();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     message = e.InnerException.Message;
                 }
@@ -92,7 +97,8 @@ namespace proje.Models
 
             return Database.Session.QueryOver<Station>().Where(x => x.state == true).List();
         }
-
+        OnComingBus DistForm = new OnComingBus();
+        
         public Station delete(Station station)
         {
             Station existStation = Database.Session.QueryOver<Station>().Where(x => x.stationName == station.stationName).SingleOrDefault();
@@ -104,7 +110,7 @@ namespace proje.Models
             {
                 station = existStation;
                 station.state = false;
-                
+
                 Database.Session.Clear();
                 Database.Session.Update(station);
                 Database.Session.Flush();
@@ -112,6 +118,27 @@ namespace proje.Models
             }
 
         }
+      
+        public List<Station> ImminentStations( location Location)
+        {
+            List<Station> getStations = new List<Station>();
 
+            String[] locations = Location.Location.Split(' ');
+            float meridyen = float.Parse(locations[0], CultureInfo.InvariantCulture.NumberFormat);
+            float paralel = float.Parse(locations[1], CultureInfo.InvariantCulture.NumberFormat);
+            IList<Station> Stations= Database.Session.QueryOver<Station>().List();
+            foreach(var i in Stations)
+            {
+                String[] locations1 = i.location.Split(' ');
+                float meridyen1 = float.Parse(locations1[0], CultureInfo.InvariantCulture.NumberFormat);
+                float paralel1 = float.Parse(locations1[1], CultureInfo.InvariantCulture.NumberFormat);
+                if (DistForm.distFrom(paralel, meridyen, paralel1, meridyen1)<=0.5)
+                {
+                    getStations.Add(i);
+                }
+            }
+            return getStations;
+
+        }
     }
 }

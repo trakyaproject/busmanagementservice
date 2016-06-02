@@ -16,8 +16,13 @@ namespace proje.Models
         public virtual Driver driverId { get; set; }
         public virtual bool state { get; set; }
         public virtual DateTime createdAt { get; set; }
+      
     }
-
+    public class DriverPoints
+    {
+        public virtual DriverPoint DriverPoint { get; set; }
+        public String Code { get; set; }
+    }
     public class DriverPointMap : ClassMapping<DriverPoint>
     {
         public DriverPointMap()
@@ -43,24 +48,28 @@ namespace proje.Models
         DriverPoint newPoint = new DriverPoint();
 
 
-        public DriverPoint DriverPointSave(DriverPoint driverpoint)
+        public DriverPoints DriverPointSave(DriverPoints driverpoint )
         {
             Driver driver = new Driver();
-            driver = Database.Session.QueryOver<Driver>().Where(x => x.tc == driverpoint.driverId.tc && x.state == true).SingleOrDefault();
-
-            if (driver.driverId != 0)
+            driver = Database.Session.QueryOver<Driver>().Where(x => x.tc == driverpoint.DriverPoint.driverId.tc && x.state == true).SingleOrDefault();
+           SaveCode savecode = Database.Session.QueryOver<SaveCode>().Where(x => x.driverId.driverId == driver.driverId).OrderBy(x => x.codeId).Desc.List().FirstOrDefault();
+            if (driverpoint.Code == savecode.code )
             {
-                driverpoint.createdAt = DateTime.Now;
-                driverpoint.pointTime = DateTime.Now;
-                driverpoint.state = true;
-                driverpoint.driverId = driver;
-                Database.Session.Save(driverpoint);
-                return driverpoint;
+                if (driver.driverId != 0)
+                {
+                    driverpoint.DriverPoint.createdAt = DateTime.Now;
+                    driverpoint.DriverPoint.pointTime = DateTime.Now;
+                    driverpoint.DriverPoint.state = true;
+                    driverpoint.DriverPoint.driverId = driver;
+                    Database.Session.Save(driverpoint.DriverPoint);
+                    return driverpoint;
+                }
 
+                else
+
+                    return null;
             }
-            else
-
-                return null;
+            return null;
         }
 
 

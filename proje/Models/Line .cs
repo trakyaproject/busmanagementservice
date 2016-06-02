@@ -156,7 +156,7 @@ namespace proje.Models
             return buslists;
         }
 
-        public static double distFrom(double lat1, double lng1, double lat2, double lng2)
+        public  double distFrom(double lat1, double lng1, double lat2, double lng2)
         {
             //double earthRadius = 6371.0;//kilometer
             //double dLat = (Math.PI / 180) * (lat2 - lat1);

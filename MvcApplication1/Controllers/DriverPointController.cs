@@ -15,7 +15,7 @@ namespace MvcApplication1.Controllers
         // GET: /DriverPoint/
         DriverPointService driverpointservice = new DriverPointService();
        [HttpPost]
-       public DriverPoint DriverPointSave(DriverPoint driverpoint)
+       public DriverPoints DriverPointSave(DriverPoints driverpoint)
         {
             return driverpointservice.DriverPointSave(driverpoint);
         }

@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace MvcApplication1.Controllers
 {
+   
     public class StationController : ApiController
     {
         StationService stationService = new StationService();
@@ -33,6 +34,11 @@ namespace MvcApplication1.Controllers
         public Station DeleteStation(Station station)
         {
             return stationService.delete(station);
+        }
+        [HttpPost]
+        public List<Station> ImminentStations(location Location)
+        {
+            return stationService.ImminentStations(Location);
         }
     }
 }
