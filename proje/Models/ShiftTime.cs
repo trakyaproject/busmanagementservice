@@ -124,17 +124,15 @@ namespace proje.Models
 
             return existShifTime.FirstOrDefault();
         }
-        public IEnumerable< ShiftTime> GetAll()
-        {
-            return Database.Session.QueryOver<ShiftTime>().Where(x=> x.stiftStart <= DateTime.Now && DateTime.Now <= x.shiftEnd).List();
-        }
+        //public IEnumerable< ShiftTime> GetAll()
+        //{
+        //    return Database.Session.QueryOver<ShiftTime>().Where(x=> x.stiftStart <= DateTime.Now && DateTime.Now <= x.shiftEnd).List();
+        //}
         
         Object mssg;
 
         public ShiftTime Save(ShiftTime shifTime)
         {
-<<<<<<< HEAD
-=======
 
             shifTime.plate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime.plate.plate).SingleOrDefault();
         shifTime.lineId=Database.Session.QueryOver<Line>().Where(x => x.lineName == shifTime.lineId.lineName).SingleOrDefault();
@@ -150,7 +148,7 @@ namespace proje.Models
             //        mssg = e.InnerException.Message;
             //    else
             //        mssg = e.Message;
->>>>>>> c74b9c25179700fc8fafabed1898184b2ef5a277
+
 
             shifTime.plate = Database.Session.QueryOver<Bus>().Where(x => x.plate == shifTime.plate.plate).SingleOrDefault();
             shifTime.lineId = Database.Session.QueryOver<Line>().Where(x => x.lineName == shifTime.lineId.lineName).SingleOrDefault();
@@ -160,7 +158,7 @@ namespace proje.Models
             shifTime.state = true;
             Database.Session.Save(shifTime);
 
-<<<<<<< HEAD
+
             //catch(Exception e)
             //{
             //    if (e.InnerException.Message != null)
@@ -169,8 +167,7 @@ namespace proje.Models
             //        mssg = e.Message;
 
 
-=======
->>>>>>> c74b9c25179700fc8fafabed1898184b2ef5a277
+
             //}
             return shifTime;
         }
