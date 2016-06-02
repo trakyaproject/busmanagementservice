@@ -23,6 +23,10 @@ namespace MvcApplication1.Controllers
         {
             return SPCountService.StationPersonCountGetByStationId(Count);
         }
-
+        [HttpPost]
+        public StationPersonCount littleStationPersonCount()
+        {
+            return SPCountService.littleStationPersonCount();
+        }
     }
 }

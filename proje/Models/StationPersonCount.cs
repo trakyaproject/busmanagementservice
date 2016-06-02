@@ -31,6 +31,7 @@ namespace proje.Models
             {
                 x.Column("stationId");
                 x.NotNullable(true);
+                x.Lazy(LazyRelation.NoLazy);
             }); 
         }
     }
@@ -54,6 +55,11 @@ namespace proje.Models
         {
             Count = Database.Session.Query<StationPersonCount>().Where(x => x.stationId == Count.stationId).OrderByDescending(x => x.stationPersonCountId).ToList().First();
             return Count;
+        }
+        public StationPersonCount littleStationPersonCount()
+        {
+            
+            return Database.Session.QueryOver<StationPersonCount>().OrderBy(x=>x.stationPersonCount).Asc.List().FirstOrDefault();
         }
     }
 }
